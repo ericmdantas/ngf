@@ -1,0 +1,11 @@
+language: node_js
+sudo: true
+
+node_js:
+  - "stable"
+
+before_install:
+  - npm i
+
+script:
+  - npm run ci-test
