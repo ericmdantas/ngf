@@ -16,16 +16,82 @@ describe('index', () => {
   })
 
   describe('run', () => {
-    it('should call the spawn correctly', () => {
-      let ngf = new NGF(childProcess, 'wat', {a: true})
+    describe('app creation', () => {
+      it('should call the spawn with the right params', () => {
+        let ngf = new NGF(childProcess, 'wat', {a: true})
 
-      sinon.spy(ngf._childProcess, 'spawn')
+        sinon.spy(ngf._childProcess, 'spawn')
 
-      ngf.run()
+        ngf.run()
 
-      sinon.assert.calledOnce(ngf._childProcess.spawn)
-      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack'], {
-        stdio: 'inherit'
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+    })
+
+    describe('component creation', () => {
+      it('should call the spawn with the right params - cmp - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'cmp', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - component - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'component', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - component - feat', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'component', 'mything'], feat: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - component - feature', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'component', 'mything'], feature: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
       })
     })
   })
