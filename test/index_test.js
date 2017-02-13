@@ -16,7 +16,7 @@ describe('index', () => {
   })
 
   describe('run', () => {
-    describe('app creation', () => {
+    describe('initial app creation', () => {
       it('should call the spawn with the right params', () => {
         let ngf = new NGF(childProcess, 'wat', {a: true})
 
@@ -30,6 +30,14 @@ describe('index', () => {
         })
 
         ngf._childProcess.spawn.restore()
+      })
+    })
+
+    describe('unrecognized type for subgenerator', () => {
+      it('should call the spawn with the right params - cmp - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', '404', 'mything'], ft: 'lib'})
+
+        expect(() => ngf.run()).to.throw(Error, /^Type not recognized/)
       })
     })
 
