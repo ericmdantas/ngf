@@ -1,6 +1,6 @@
 {
   "name": "ngf",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "ngf, ng-fullstack, generator-ng-fullstack",
   "main": "index.js",
   "directories": {
