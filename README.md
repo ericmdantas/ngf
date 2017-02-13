@@ -3,9 +3,11 @@
 
 Simple alias for [`generator-ng-fullstack`](https://github.com/ericmdantas/generator-ng-fullstack).
 
-### DISCLAIMER
+### Install
 
-This is a work in progress. Wait for 1.0.0 until you use it in your workflow.
+```shell
+$ npm i -g ngf
+```
 
 ### What?
 
@@ -28,6 +30,7 @@ Following what's done in `angular-cli`, we have:
 
  # creates a new component called people_list_cmp
 
+ # ngf: is the responsible to talk with ng-fullstack
  # g: means `generate`
  # component: is the type of file that's being created
  # people_list_cmp: is the name given to the file/component
