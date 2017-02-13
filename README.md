@@ -24,14 +24,14 @@ Because typing `yo ng-fullstack:component people_list_cmp --feature person` all 
 Following what's done in `angular-cli`, we have:
 
 ```shell
- $ ngf g component people_list_cmp --feat person
+ $ ngf g component people_list_cmp --ft person
 
  # creates a new component called people_list_cmp
- 
+
  # g: means `generate`
  # component: is the type of file that's being created
  # people_list_cmp: is the name given to the file/component
- # --feat: means the `--feature`, which is the context to the created file
+ # --ft: means the `--feature`, which is the context to the created file
  ```
 
 Check the [API section in the wiki](https://github.com/ericmdantas/ngf/wiki/API) for more.
