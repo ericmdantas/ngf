@@ -27,24 +27,15 @@ Following what's done in `angular-cli`, we have:
 ```shell
  # creates a new component called people_list_cmp
  $ ngf g component people_list_cmp --feat person
-```
-
-##### Directive
-```shell
- # creates a new directive called on_click
- $ ngf g directive on_click --feat lib
-```
-
-##### Model
-```shell
- # creates a new model called car
- $ ngf g model car --feat car
-```
-
-And much more.
 
 
-Check the [API section in the wiki](https://github.com/ericmdantas/ngf/wiki/API) to know more.
+ # g: means `generate`
+ # component: is the type of file that's being created
+ # people_list_cmp: is the name given to the file/component
+ # --feat: means the `--feature`, which is the context to the created file
+ ```
+
+Check the [API section in the wiki](https://github.com/ericmdantas/ngf/wiki/API) for more.
 
 ### LICENSE
 
