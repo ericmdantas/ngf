@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "ci-test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter list --check-leaks",
+    "ci-test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test/ --report lcovonly -- --recursive -R list --check-leaks && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "bin": {
     "ngf": "./bin/index.js"
@@ -20,7 +20,9 @@
   "keywords": [
     "ngf",
     "ng-fullstack",
-    "generator-ng-fullstack"
+    "generator-ng-fullstack",
+    "generator",
+    "fullstack"
   ],
   "author": "Eric Mendes Dantas",
   "license": "MIT",
@@ -32,5 +34,10 @@
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.16",
+    "istanbul": "^0.4.5",
+    "proxyquire": "^1.7.11"
   }
 }
