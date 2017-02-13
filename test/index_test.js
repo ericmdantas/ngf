@@ -15,13 +15,13 @@ describe('index', () => {
     })
   })
 
-  describe('init', () => {
+  describe('run', () => {
     it('should call the spawn correctly', () => {
       let ngf = new NGF(childProcess, 'wat', {a: true})
 
       sinon.spy(ngf._childProcess, 'spawn')
 
-      ngf.init()
+      ngf.run()
 
       sinon.assert.calledOnce(ngf._childProcess.spawn)
       sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack'], {
