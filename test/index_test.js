@@ -35,9 +35,56 @@ describe('index', () => {
 
     describe('unrecognized type for subgenerator', () => {
       it('should call the spawn with the right params - cmp - ft', () => {
-        let ngf = new NGF(childProcess, 'wat', {_: ['g', '404', 'mything'], ft: 'lib'})
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'mything'], ft: 'lib'})
 
         expect(() => ngf.run()).to.throw(Error, /^Type not recognized/)
+      })
+    })
+
+    describe('creation with g, gen and generate', () => {
+      it('should call the spawn with the right params - g', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'cmp', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - gen', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['gen', 'cmp', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - generate', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['generate', 'cmp', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
       })
     })
 
