@@ -352,7 +352,7 @@ describe('index', () => {
         ngf.run()
 
         sinon.assert.calledOnce(ngf._childProcess.spawn)
-        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:service', 'mything', '--feature', 'lib'], {
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:factory', 'mything', '--feature', 'lib'], {
           stdio: 'inherit'
         })
 
@@ -459,7 +459,7 @@ describe('index', () => {
         ngf.run()
 
         sinon.assert.calledOnce(ngf._childProcess.spawn)
-        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:factory', 'mything', '--feature', 'lib'], {
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:module', 'mything', '--feature', 'lib'], {
           stdio: 'inherit'
         })
 
@@ -491,7 +491,7 @@ describe('index', () => {
         ngf.run()
 
         sinon.assert.calledOnce(ngf._childProcess.spawn)
-        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:module', 'mything', '--feature', 'lib'], {
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:filter', 'mything', '--feature', 'lib'], {
           stdio: 'inherit'
         })
 
@@ -593,7 +593,7 @@ describe('index', () => {
 
     describe('pipe creation', () => {
       it('should call the spawn with the right params - pp - ft', () => {
-        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'pipe', 'mything'], ft: 'lib'})
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'pp', 'mything'], ft: 'lib'})
 
         sinon.spy(ngf._childProcess, 'spawn')
 
@@ -615,7 +615,7 @@ describe('index', () => {
         ngf.run()
 
         sinon.assert.calledOnce(ngf._childProcess.spawn)
-        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:resource', 'mything', '--feature', 'lib'], {
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:pipe', 'mything', '--feature', 'lib'], {
           stdio: 'inherit'
         })
 
@@ -786,7 +786,7 @@ describe('index', () => {
         ngf.run()
 
         sinon.assert.calledOnce(ngf._childProcess.spawn)
-        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:edpt', 'mything', '--feature', 'lib'], {
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:endpoint', 'mything', '--feature', 'lib'], {
           stdio: 'inherit'
         })
 
