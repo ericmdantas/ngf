@@ -32,7 +32,7 @@
   "homepage": "https://github.com/ericmdantas/ngf#readme",
   "dependencies": {
     "chai": "^3.5.0",
-    "minimatch": "^3.0.3",
+    "minimist": "^1.2.0",
     "mocha": "^3.2.0",
     "sinon": "^1.17.7"
   },
