@@ -48,8 +48,32 @@ describe('index', () => {
       })
     })
 
-    describe('unrecognized type for subgenerator', () => {
-      it('should call the spawn with the right params - cmp - ft', () => {
+    describe('not enough info informed', () => {
+      it('not informed name', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', ''], ft: 'lib'})
+
+        expect(() => ngf.run()).to.throw(Error, /^The name has to be defined/)
+      })
+
+      it('not informed feature - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'some_name'], ft: ''})
+
+        expect(() => ngf.run()).to.throw(Error, /^The feature has to be defined/)
+      })
+
+      it('not informed feature - feat', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'some_name'], feat: ''})
+
+        expect(() => ngf.run()).to.throw(Error, /^The feature has to be defined/)
+      })
+
+      it('not informed feature - feature', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'some_name'], feature: ''})
+
+        expect(() => ngf.run()).to.throw(Error, /^The feature has to be defined/)
+      })
+
+      it('unrecognized type', () => {
         let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'mything'], ft: 'lib'})
 
         expect(() => ngf.run()).to.throw(Error, /^Type not recognized/)
