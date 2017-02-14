@@ -15,7 +15,7 @@ The idea is to have something similar to [`angular-cli`](https://github.com/angu
 
 ### Why?
 
-Because typing `yo ng-fullstack:component people_list_cmp --feature person` all the time sucks.
+Because typing `yo ng-fullstack:component people_cmp --feature person` all the time sucks.
 
 ### How?
 
@@ -34,9 +34,10 @@ $ ngf
 Create some component, services, models, by running:
 
 ```shell
- $ ngf g component people_list_cmp --ft person
+ $ ngf g cmp people_cmp --ft person
 
  # creates a new component called people_list_cmp
+ # it's the same as running: yo ng-fullstack:component people_cmp --feature person
 
  # ngf: is the responsible to talk with ng-fullstack
  # g: means `generate`
