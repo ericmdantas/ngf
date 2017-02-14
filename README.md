@@ -23,7 +23,15 @@ Because typing `yo ng-fullstack:component people_list_cmp --feature person` all 
 
 ### API
 
-Following what's done in `angular-cli`, we have:
+Answer some questions by runing:
+
+```shell
+$ ngf
+
+# runs `yo ng-fullstack` behind the hood
+```
+
+Create some component, services, models, by running:
 
 ```shell
  $ ngf g component people_list_cmp --ft person
