@@ -31,6 +31,21 @@ describe('index', () => {
 
         ngf._childProcess.spawn.restore()
       })
+
+      it('should add some empty info in the _ array and .feature prop', () => {
+        let ngf = new NGF(childProcess, 'wat', {a: true})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        expect(ngf._options._[0]).to.equal("")
+        expect(ngf._options._[1]).to.equal("")
+        expect(ngf._options._[2]).to.equal("")
+        expect(ngf._options.feature).to.equal("")
+
+        ngf._childProcess.spawn.restore()
+      })
     })
 
     describe('unrecognized type for subgenerator', () => {
