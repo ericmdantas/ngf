@@ -37,7 +37,7 @@ Create some component, services, models, by running:
  $ ngf g cmp people_cmp --ft person
 
  # creates a new component called people_list_cmp
- # it's the same as running: yo ng-fullstack:component people_cmp --feature person
+ # it's the same as running: `yo ng-fullstack:component people_cmp --feature person`
 
  # ngf: is the responsible to talk with ng-fullstack
  # g: means `generate`
