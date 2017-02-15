@@ -685,6 +685,68 @@ describe('index', () => {
       })
     })
 
+    describe('decorator creation', () => {
+      it('should call the spawn with the right params - dec - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'dec', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:decorator', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - decorator - ft', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'decorator', 'mything'], ft: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:decorator', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - decorator - feat', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'decorator', 'mything'], feat: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:decorator', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+
+      it('should call the spawn with the right params - decorator - feature', () => {
+        let ngf = new NGF(childProcess, 'wat', {_: ['g', 'decorator', 'mything'], feature: 'lib'})
+
+        sinon.spy(ngf._childProcess, 'spawn')
+
+        ngf.run()
+
+        sinon.assert.calledOnce(ngf._childProcess.spawn)
+        sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:decorator', 'mything', '--feature', 'lib'], {
+          stdio: 'inherit'
+        })
+
+        ngf._childProcess.spawn.restore()
+      })
+    })
+
     describe('pipe creation', () => {
       it('should call the spawn with the right params - pp - ft', () => {
         let ngf = new NGF(childProcess, 'wat', {_: ['g', 'pp', 'mything'], ft: 'lib'})
