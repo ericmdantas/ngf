@@ -33,14 +33,14 @@
   },
   "homepage": "https://github.com/ericmdantas/ngf#readme",
   "dependencies": {
-    "chai": "^3.5.0",
-    "minimist": "^1.2.0",
-    "mocha": "^3.2.0",
-    "sinon": "^1.17.7"
+    "minimist": "^1.2.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "coveralls": "^2.11.16",
     "istanbul": "^0.4.5",
-    "proxyquire": "^1.7.11"
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.11",
+    "sinon": "^1.17.7"
   }
 }
