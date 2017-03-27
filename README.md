@@ -41,12 +41,12 @@ Create some component, services, models, by running:
 
  # ngf: is the responsible to talk with ng-fullstack
  # g: means `generate`
- # component: is the type of file that's being created
- # people_list_cmp: is the name given to the file/component
+ # cmp: is the type of file that's being created
+ # people_cmp: is the name given to the file/component
  # --ft: means the `--feature`, which is the context to the created file
  ```
 
-Check the [API section in the wiki](https://github.com/ericmdantas/ngf/wiki/API) for more.
+Check the [API section in the wiki](https://github.com/ericmdantas/ngf/wiki/API) and the [pro tips](https://github.com/ericmdantas/ngf/wiki/Pro-tips) for improvements in your workflow.
 
 ### LICENSE
 
