@@ -19,7 +19,7 @@ Because typing `yo ng-fullstack:component people_cmp --feature person` all the t
 
 ### How?
 
-`ngf` simply passes the info to `ng-fullstack`, there's no black magic involved.
+`ngf` simply passes the info down to `ng-fullstack`, there's no black magic involved.
 
 ### API
 
@@ -31,17 +31,17 @@ $ ngf
 # runs `yo ng-fullstack` behind the hood
 ```
 
-Create some component, services, models, by running:
+Create components, services, models and many others, by running:
 
 ```shell
  $ ngf g cmp people_cmp --ft person
 
- # creates a new component called people_list_cmp
+ # creates a new component called people_cmp
  # it's the same as running: `yo ng-fullstack:component people_cmp --feature person`
 
  # ngf: is the responsible to talk with ng-fullstack
  # g: means `generate`
- # cmp: is the type of file that's being created
+ # cmp: is the type of file that's being created - a component
  # people_cmp: is the name given to the file/component
  # --ft: means the `--feature`, which is the context to the created file
  ```
