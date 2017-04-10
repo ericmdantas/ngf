@@ -76,7 +76,7 @@ describe('index', () => {
       it('unrecognized type', () => {
         let ngf = new NGF(childProcess, 'wat', {_: ['g', 'unknown_type', 'mything'], ft: 'lib'})
 
-        expect(() => ngf.run()).to.throw(Error, /^Type not recognized/)
+        expect(() => ngf.run()).to.throw(Error, /^Type not recognized: unknown_type/)
       })
     })
 
@@ -993,6 +993,255 @@ describe('index', () => {
 
         ngf._childProcess.spawn.restore()
       })
+    })
+  })
+
+  describe('multiple types', () => {
+    it('should create a single component with the given name', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp]', 'mything'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledOnce(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component and a directive with the given name', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp,dct]', 'mything'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledTwice(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component, a directive, a service and a model with the given name', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp,dct,svc,mde]', 'mything'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:service', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component, a directive, a service and a model with the given name - with space between the types', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp  ,  dct  , svc  ,  mde]', 'mything'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:service', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+  })
+
+  describe('multiple names', () => {
+    it('should create a single component with the given name', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', 'cmp', '[mything1]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledOnce(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a directive with the given names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', 'dct', '[mything1,mything2]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledTwice(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a model with the given names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', 'mde', '[mything1,mything2,mything3,mything4]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything3', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything4', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a model with the given names - with space between the names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', 'mde', '[mything1,mything2,mything3,mything4]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything3', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything4', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+  })
+
+  describe('multiple types and names', () => {
+    it('should create a single component with the given name', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp]', '[mything1]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledOnce(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component and a directive with the given names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp,dct]', '[mything1,mything2]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.calledTwice(ngf._childProcess.spawn)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component, a directive, a service and a model with the given names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp,dct,svc,mde]', '[mything1,mything2,mything3,mything4]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:service', 'mything3', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything4', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
+    })
+
+    it('should create a component, a directive, a service, and a model with the given names - with space between the types and names', () => {
+      let ngf = new NGF(childProcess, 'wat', {_: ['g', '[cmp  ,  dct, svc    ,  mde', '[mything1,mything2,mything3,mything4]'], feature: 'lib'})
+
+      sinon.spy(ngf._childProcess, 'spawn')
+
+      ngf.run()
+
+      sinon.assert.callCount(ngf._childProcess.spawn, 4)
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:component', 'mything1', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:directive', 'mything2', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:service', 'mything3', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+      sinon.assert.calledWith(ngf._childProcess.spawn, 'wat', ['ng-fullstack:model', 'mything4', '--feature', 'lib'], {
+        stdio: 'inherit'
+      })
+
+      ngf._childProcess.spawn.restore()
     })
   })
 })
