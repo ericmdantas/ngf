@@ -5,7 +5,7 @@ Simple alias for [`generator-ng-fullstack`](https://github.com/ericmdantas/gener
 
 ### Prerequisites
 
-You'll need to have both yo.js and generator-ng-fullstack installed globally
+You'll need to have both `yo` and `generator-ng-fullstack` installed globally
 
 ```shell
 $ npm i -g yo
